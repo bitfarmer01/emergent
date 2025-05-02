@@ -4,17 +4,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
+import ParticleBackground from "./components/ParticleBackground";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const helloWorldApi = async () => {
     try {
       const response = await axios.get(`${API}/`);
       console.log(response.data.message);
     } catch (e) {
       console.error(e, `errored out requesting / api`);
+    } finally {
+      // Simulate loading for a smoother entry animation
+      setTimeout(() => setIsLoading(false), 500);
     }
   };
 
@@ -23,9 +29,18 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-deep-purple min-h-screen">
-      <Header />
-      <HeroSection />
+    <div className="bg-deep-purple min-h-screen relative overflow-hidden">
+      {isLoading ? (
+        <div className="fixed inset-0 bg-deep-purple z-50 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-accent-pink"></div>
+        </div>
+      ) : (
+        <>
+          <Header />
+          <HeroSection />
+          <ParticleBackground />
+        </>
+      )}
     </div>
   );
 };
