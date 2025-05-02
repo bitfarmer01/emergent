@@ -1,38 +1,71 @@
 .App {
-    text-align: center;
+  text-align: center;
+  overflow-x: hidden;
+  position: relative;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+body::-webkit-scrollbar {
+  width: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+body::-webkit-scrollbar-track {
+  background: #0C0028;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+body::-webkit-scrollbar-thumb {
+  background: #E100FF;
+  border-radius: 5px;
 }
 
-.App-link {
-    color: #61dafb;
+body::-webkit-scrollbar-thumb:hover {
+  background: #FF00C7;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: 0 0 15px rgba(225, 0, 255, 0.7);
+}
+
+/* Animated gradient border button effect */
+.animated-border {
+  position: relative;
+  z-index: 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: #E100FF;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: conic-gradient(transparent, #2B6CF6, transparent 30%);
+  animation: rotate 4s linear infinite;
+}
+
+.animated-border::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 2px;
+  top: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  background: #0C0028;
+  border-radius: 0.5rem;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(1turn);
+  }
 }
