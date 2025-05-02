@@ -2,16 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
         "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
         "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
+}
+
+/* Custom styles */
+.text-glow {
+    text-shadow: 0 0 10px rgba(214, 207, 255, 0.5);
+}
+
+.galaxy-background {
+    background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.galaxy-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom right, rgba(12, 0, 40, 0.7), rgba(255, 0, 199, 0.4));
+    z-index: 1;
+}
+
+.galaxy-background > * {
+    position: relative;
+    z-index: 2;
+}
+
+.text-backdrop {
+    position: relative;
+}
+
+.text-backdrop::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 16px;
+    z-index: -1;
+}
+
+.beam-effect {
+    position: relative;
+}
+
+.beam-effect::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 200px;
+    height: 300px;
+    transform: translateX(-50%);
+    background: radial-gradient(
+        ellipse at bottom,
+        rgba(225, 0, 255, 0.4) 0%,
+        rgba(43, 108, 246, 0.2) 50%,
+        transparent 100%
+    );
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
 }
